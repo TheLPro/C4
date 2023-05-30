@@ -27,6 +27,8 @@ public class Items {
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("item-title")));
         meta.setLore(lore);
 
+        c4.setItemMeta(meta);
+
         return c4;
     }
 
@@ -41,6 +43,8 @@ public class Items {
         assert meta != null;
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("remote-title")));
         meta.setLore(lore);
+
+        remote.setItemMeta(meta);
 
         return remote;
     }

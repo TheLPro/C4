@@ -26,16 +26,18 @@ public class C4PlaceEvent implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getItem() != null && e.getItem().equals(Items.getC4())) {
                 player.sendMessage("You placed down a C4, use the remote to ignite it.");
-                config.set(uuid, e.getClickedBlock().getLocation());
+                config.set(uuid, e.getClickedBlock().getLocation().add(0, 1, 0));
             }
         } else if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getItem() != null && e.getItem().equals(Items.getRemote())) {
-                if (config.contains(uuid)) {
+                if (config.get(uuid) != null) {
                     Location loc = config.getLocation(uuid);
                     player.sendMessage(ChatColor.RED + "BOOM!");
                     loc.getWorld().spawnEntity(loc, EntityType.PRIMED_TNT);
+                    config.set(uuid, null);
                 } else {
                     player.sendMessage(ChatColor.RED + "You need to place a C4 first!");
+                    e.setCancelled(true);
                 }
             }
         }
